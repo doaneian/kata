@@ -26,6 +26,12 @@ public class WordSearchService {
                         possibleCoordinates = checkHorizontalBackward(row, j, i, word);
                         if (possibleCoordinates.size() == word.length()) {
                             solution.put(word, possibleCoordinates);
+                            continue;
+                        }
+
+                        possibleCoordinates = checkVertical(puzzle, i, j, word);
+                        if (possibleCoordinates.size() == word.length()) {
+                            solution.put(word, possibleCoordinates);
                         }
                     }
                 }
@@ -54,6 +60,18 @@ public class WordSearchService {
             Coordinate coordinate = new Coordinate();
             coordinate.setX(i);
             coordinate.setY(rowIndex);
+            coordinates.add(coordinate);
+        }
+        return coordinates;
+    }
+
+    private List<Coordinate> checkVertical(String[][] puzzle, int startIndex, int columnIndex, String word) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = startIndex; i < puzzle.length && i < word.length() &&
+                puzzle[i][columnIndex].compareTo(word.substring(i - startIndex, i - startIndex + 1)) == 0; i++) {
+            Coordinate coordinate = new Coordinate();
+            coordinate.setX(columnIndex);
+            coordinate.setY(i);
             coordinates.add(coordinate);
         }
         return coordinates;
