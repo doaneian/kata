@@ -56,6 +56,12 @@ public class WordSearchService {
                         possibleCoordinates = checkDiagonal3(puzzle, i, j, word);
                         if (possibleCoordinates.size() == word.length()) {
                             solution.put(word, possibleCoordinates);
+                            continue;
+                        }
+
+                        possibleCoordinates = checkDiagonal4(puzzle, i, j, word);
+                        if (possibleCoordinates.size() == word.length()) {
+                            solution.put(word, possibleCoordinates);
                         }
                     }
                 }
@@ -143,6 +149,18 @@ public class WordSearchService {
                 puzzle[startIndex - i][columnIndex + i].compareTo(word.substring(i, i + 1)) == 0; i++) {
             Coordinate coordinate = new Coordinate();
             coordinate.setX(columnIndex + i);
+            coordinate.setY(startIndex - i);
+            coordinates.add(coordinate);
+        }
+        return coordinates;
+    }
+
+    private List<Coordinate> checkDiagonal4(String[][] puzzle, int startIndex, int columnIndex, String word) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; startIndex - i >= 0 && columnIndex - i >= 0 && i < word.length() &&
+                puzzle[startIndex - i][columnIndex - i].compareTo(word.substring(i, i + 1)) == 0; i++) {
+            Coordinate coordinate = new Coordinate();
+            coordinate.setX(columnIndex - i);
             coordinate.setY(startIndex - i);
             coordinates.add(coordinate);
         }
