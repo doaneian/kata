@@ -73,10 +73,10 @@ public class WordSearchService {
 
     private List<Coordinate> checkHorizontalForward(String[] row, int startIndex, int rowIndex, String word) {
         List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = startIndex; i < row.length && i < word.length() &&
-                row[i].compareTo(word.substring(i - startIndex, i - startIndex + 1)) == 0; i++) {
+        for (int i = 0; i + startIndex < row.length && i < word.length() &&
+                row[i + startIndex].compareTo(word.substring(i, i + 1)) == 0; i++) {
             Coordinate coordinate = new Coordinate();
-            coordinate.setX(i);
+            coordinate.setX(i + startIndex);
             coordinate.setY(rowIndex);
             coordinates.add(coordinate);
         }
@@ -85,10 +85,10 @@ public class WordSearchService {
 
     private List<Coordinate> checkHorizontalBackward(String[] row, int startIndex, int rowIndex, String word) {
         List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = startIndex; i >= 0 && i < word.length() &&
-                row[i].compareTo(word.substring(startIndex - i, startIndex - i + 1)) == 0; i--) {
+        for (int i = 0; startIndex - i >= 0 && i < word.length() &&
+                row[startIndex - i].compareTo(word.substring(i, i + 1)) == 0; i++) {
             Coordinate coordinate = new Coordinate();
-            coordinate.setX(i);
+            coordinate.setX(startIndex - i);
             coordinate.setY(rowIndex);
             coordinates.add(coordinate);
         }
@@ -97,11 +97,11 @@ public class WordSearchService {
 
     private List<Coordinate> checkVertical(String[][] puzzle, int startIndex, int columnIndex, String word) {
         List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = startIndex; i < puzzle.length && i < word.length() &&
-                puzzle[i][columnIndex].compareTo(word.substring(i - startIndex, i - startIndex + 1)) == 0; i++) {
+        for (int i = 0; i + startIndex < puzzle.length && i < word.length() &&
+                puzzle[i + startIndex][columnIndex].compareTo(word.substring(i, i + 1)) == 0; i++) {
             Coordinate coordinate = new Coordinate();
             coordinate.setX(columnIndex);
-            coordinate.setY(i);
+            coordinate.setY(startIndex + i);
             coordinates.add(coordinate);
         }
         return coordinates;
@@ -109,11 +109,11 @@ public class WordSearchService {
 
     private List<Coordinate> checkVerticalBackwards(String[][] puzzle, int startIndex, int columnIndex, String word) {
         List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = startIndex; i >= 0 && i < word.length() &&
-                puzzle[i][columnIndex].compareTo(word.substring(startIndex - i, startIndex - i + 1)) == 0; i--) {
+        for (int i = 0; startIndex - i >= 0 && i < word.length() &&
+                puzzle[startIndex - i][columnIndex].compareTo(word.substring(i, i + 1)) == 0; i++) {
             Coordinate coordinate = new Coordinate();
             coordinate.setX(columnIndex);
-            coordinate.setY(i);
+            coordinate.setY(startIndex - i);
             coordinates.add(coordinate);
         }
         return coordinates;
