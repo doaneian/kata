@@ -50,6 +50,12 @@ public class WordSearchService {
                         possibleCoordinates = checkDiagonal2(puzzle, i, j, word);
                         if (possibleCoordinates.size() == word.length()) {
                             solution.put(word, possibleCoordinates);
+                            continue;
+                        }
+
+                        possibleCoordinates = checkDiagonal3(puzzle, i, j, word);
+                        if (possibleCoordinates.size() == word.length()) {
+                            solution.put(word, possibleCoordinates);
                         }
                     }
                 }
@@ -121,11 +127,23 @@ public class WordSearchService {
 
     private List<Coordinate> checkDiagonal2(String[][] puzzle, int startIndex, int columnIndex, String word) {
         List<Coordinate> coordinates = new ArrayList<>();
-        for (int i = 0; i + startIndex < puzzle.length && puzzle[0].length - i > 0 && i < word.length() &&
-                puzzle[startIndex + i][puzzle.length - i - 1].compareTo(word.substring(i, i + 1)) == 0; i++) {
+        for (int i = 0; i + startIndex < puzzle.length && columnIndex - i >= 0 && i < word.length() &&
+                puzzle[startIndex + i][columnIndex - i].compareTo(word.substring(i, i + 1)) == 0; i++) {
             Coordinate coordinate = new Coordinate();
-            coordinate.setX(puzzle.length - i - 1);
+            coordinate.setX(columnIndex - i);
             coordinate.setY(startIndex + i);
+            coordinates.add(coordinate);
+        }
+        return coordinates;
+    }
+
+    private List<Coordinate> checkDiagonal3(String[][] puzzle, int startIndex, int columnIndex, String word) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; startIndex - i >= 0 && columnIndex + i < puzzle[0].length && i < word.length() &&
+                puzzle[startIndex - i][columnIndex + i].compareTo(word.substring(i, i + 1)) == 0; i++) {
+            Coordinate coordinate = new Coordinate();
+            coordinate.setX(columnIndex + i);
+            coordinate.setY(startIndex - i);
             coordinates.add(coordinate);
         }
         return coordinates;

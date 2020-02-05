@@ -129,4 +129,23 @@ public class WordSearchServiceTest {
         Assert.assertEquals(solution.get("test").get(3).getX(), 0);
         Assert.assertEquals(solution.get("test").get(3).getY(), 3);
     }
+
+    @Test
+    public void testFindOneWordDiagonal_3() {
+        Map<String, List<Coordinate>> solution = wordSearchService.searchWords(new String[]{"test"},
+                new String[][]{{"a", "a", "b", "t"}, {"d", "f", "s", "d"}, {"l", "e", "g", "h"}, {"t", "j", "k", "l"}});
+        Assert.assertEquals(solution.get("test").size(), 4);
+
+        Assert.assertEquals(solution.get("test").get(0).getX(), 0);
+        Assert.assertEquals(solution.get("test").get(0).getY(), 3);
+
+        Assert.assertEquals(solution.get("test").get(1).getX(), 1);
+        Assert.assertEquals(solution.get("test").get(1).getY(), 2);
+
+        Assert.assertEquals(solution.get("test").get(2).getX(), 2);
+        Assert.assertEquals(solution.get("test").get(2).getY(), 1);
+
+        Assert.assertEquals(solution.get("test").get(3).getX(), 3);
+        Assert.assertEquals(solution.get("test").get(3).getY(), 0);
+    }
 }
