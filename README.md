@@ -5,9 +5,10 @@ Requirements to run:
 
 To run:
 1. Clone this repository
-2. Run mvn clean package
-3. Run kata-1.0-SNAPSHOT.jar
-4. Post to /wordSearch
+2. Checkout the develop branch
+3. Run mvn clean package
+4. Run the kata-1.0-SNAPSHOT.jar file
+5. Post to /wordSearch
 
 Post body:
  - First line is comma delimited list of words to search for
