@@ -72,4 +72,23 @@ public class WordSearchServiceTest {
         Assert.assertEquals(solution.get("test").get(3).getX(), 0);
         Assert.assertEquals(solution.get("test").get(3).getY(), 3);
     }
+
+    @Test
+    public void testFindOneWordVertically_backwards() {
+        Map<String, List<Coordinate>> solution = wordSearchService.searchWords(new String[]{"test"},
+                new String[][]{{"t", "a", "b", "c"}, {"s", "b", "c", "d"}, {"e", "f", "g", "h"}, {"t", "j", "k", "l"}});
+        Assert.assertEquals(solution.get("test").size(), 4);
+
+        Assert.assertEquals(solution.get("test").get(0).getX(), 0);
+        Assert.assertEquals(solution.get("test").get(0).getY(), 3);
+
+        Assert.assertEquals(solution.get("test").get(1).getX(), 0);
+        Assert.assertEquals(solution.get("test").get(1).getY(), 2);
+
+        Assert.assertEquals(solution.get("test").get(2).getX(), 0);
+        Assert.assertEquals(solution.get("test").get(2).getY(), 1);
+
+        Assert.assertEquals(solution.get("test").get(3).getX(), 0);
+        Assert.assertEquals(solution.get("test").get(3).getY(), 0);
+    }
 }
