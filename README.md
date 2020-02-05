@@ -31,7 +31,6 @@ T,G,L,B,H,C,B,E,C,H,T,O,Y,I,K
 O,J,Y,E,U,L,N,C,C,L,Y,B,Z,U,H
 W,Z,M,I,S,U,K,U,R,B,I,D,U,X,S
 K,Y,L,B,Q,Q,P,M,D,F,C,K,E,A,B
-
 ```
 
 Response is a map, each key is the searched word, and the value is the list of coordinates that each letter appears in the puzzle.
