@@ -20,6 +20,12 @@ public class WordSearchService {
                         List<Coordinate> possibleCoordinates = checkHorizontalForward(row, j, i, word);
                         if (possibleCoordinates.size() == word.length()) {
                             solution.put(word, possibleCoordinates);
+                            continue;
+                        }
+
+                        possibleCoordinates = checkHorizontalBackward(row, j, i, word);
+                        if (possibleCoordinates.size() == word.length()) {
+                            solution.put(word, possibleCoordinates);
                         }
                     }
                 }
@@ -33,6 +39,18 @@ public class WordSearchService {
         List<Coordinate> coordinates = new ArrayList<>();
         for (int i = startIndex; i < row.length && i < word.length() &&
                 row[i].compareTo(word.substring(i - startIndex, i - startIndex + 1)) == 0; i++) {
+            Coordinate coordinate = new Coordinate();
+            coordinate.setX(i);
+            coordinate.setY(rowIndex);
+            coordinates.add(coordinate);
+        }
+        return coordinates;
+    }
+
+    private List<Coordinate> checkHorizontalBackward(String[] row, int startIndex, int rowIndex, String word) {
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = startIndex; i >= 0 && i < word.length() &&
+                row[i].compareTo(word.substring(startIndex - i, startIndex - i + 1)) == 0; i--) {
             Coordinate coordinate = new Coordinate();
             coordinate.setX(i);
             coordinate.setY(rowIndex);
